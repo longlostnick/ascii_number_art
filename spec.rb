@@ -41,6 +41,16 @@ d8888  d8888
 
   end
 
+  describe "append_char" do
+
+    it "should append lines to an existing string's lines" do
+      lines = "this\nso"
+      lines_to_append = " is\n cool"
+      Ascii.append_char(lines, lines_to_append).should eq("this is\nso cool\n")
+    end
+
+  end
+
   describe "num_to_word" do
 
     it "converts an integer to a string" do
