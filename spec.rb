@@ -9,7 +9,7 @@ describe "ASCII ART THING" do
   describe "art" do
 
     it "accepts a number" do
-      AsciiArt.should_receive(:send).once.with("one")
+      AsciiArt.should_receive(:send).once.with("one").and_call_original
       Ascii.output_character(1)
     end
 
@@ -41,10 +41,10 @@ d8888  d8888
 
   end
 
-  describe "num_to_art" do
+  describe "num_to_word" do
 
     it "converts an integer to a string" do
-      Ascii.num_to_art(1).should eq("one")
+      Ascii.num_to_word(1).should eq("one")
     end
 
   end
