@@ -1,62 +1,30 @@
 #! /Users/nick/.rbenv/shims/ruby
 
 require 'rspec'
-require_relative 'ascii_def'
 require_relative 'ascii'
 
-describe "ASCII ART THING" do
+describe "Ascii" do
 
-  describe "art" do
-
-    it "accepts a number" do
-      AsciiArt.should_receive(:send).once.with("one").and_call_original
-      Ascii.output_character(1)
-    end
-
-    it "returns ascii art" do
-      Ascii.output_character(1).should eq <<-MARKER
- d888  
-d8888  
-  888  
-  888  
-  888  
-  888  
-  888  
-8888888
-      MARKER
-    end
-
-    it "works with double digit numbers" do
-      Ascii.output_character(11).should eq <<-MARKER
- d888   d888  
-d8888  d8888  
-  888    888  
-  888    888  
-  888    888  
-  888    888  
-  888    888  
-88888888888888
-      MARKER
-    end
-
+  it "compiles eight lines of ascii" do
+    Ascii.should_receive(:get_line).exactly(8).times.and_return("hi")
+    Ascii.output_character(1).should eq("hi\nhi\nhi\nhi\nhi\nhi\nhi\nhi\n")
   end
 
-  describe "append_char" do
-
-    it "should append lines to an existing string's lines" do
-      lines = "this\nso"
-      lines_to_append = " is\n cool"
-      Ascii.append_char(lines, lines_to_append).should eq("this is\nso cool\n")
-    end
-
+  it "gets a line from the font based on the number" do
+    Ascii.get_line(317, 0).should eq(" .d8888b.  d888  8888888888")
   end
 
-  describe "num_to_word" do
-
-    it "converts an integer to a string" do
-      Ascii.num_to_word(1).should eq("one")
-    end
-
+  it "generates an entire ascii art number" do
+    Ascii.output_character(285).should eq <<-MARKER
+ .d8888b.  .d8888b. 888888888 
+d88P  Y88bd88P  Y88b888       
+       888Y88b. d88P888       
+     .d88P "Y88888" 8888888b. 
+ .od888P" .d8P""Y8b.     "Y88b
+d88P"     888    888       888
+888"      Y88b  d88PY88b  d88P
+888888888  "Y8888P"  "Y8888P" 
+    MARKER
   end
 
 end
